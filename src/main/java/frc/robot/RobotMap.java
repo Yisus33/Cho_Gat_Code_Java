@@ -47,7 +47,7 @@ public class RobotMap {
   public final static int MotorCanonArm = 9;
   
   public final static int MotorCanonUpper = 4;
-  public final static int MotrosCanonBotton = 5;
+  public final static int MotorsCanonBotton = 5;
   //puertos para el hatch panel
   
   // Parametros del entorno
