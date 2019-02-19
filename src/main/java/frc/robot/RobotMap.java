@@ -6,7 +6,6 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot;
-
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
  * to a variable name. This provides flexibility changing wiring, makes checking
@@ -24,34 +23,34 @@ public class RobotMap {
   // public static int rangefinderPort = 1;
   // public static int rangefinderModule = 1;
 
-  // Puertos para el Joystick o controles
+  // PUERTOS PARA EL JOYSTICK O LOS CONTROLES
   public final static int ACTUAL_USB_PORT = 0;
-
-  // -- Botones de Joyslstick para ejecutar acciones
-  // botonnes para el cargo handler
+  // -- botones del joystick para ejecutar acciones
+  // botones para el cargo handler
   public final static int LAUNCHER_BUTTON_NUMBER = 2;
   public final static int SUCKER_BUTTON_NUMBER = 1;
-  public final static int CANON_ARM = 4;
-  public final static int SLIDER_PORT = 3;
   public final static int BUTTON_PORT_3 = 3;
   public final static int BUTTON_PORT_5 = 5;
 
-  //Puertos para el drive train
-  public final static int MotorLeftRear = 0;
-  public final static int MotorLeftFrond= 1;
-  
-  public final static int MotorRightRear = 2;
-  public final static int MotorRightFront = 3;
+  public final static int SLIDER_AXIS_PORT = 3;
 
-  //Puertos para el cargo handler
-  public final static int MotorCanonArm = 9;
-  
+  // PUERTOS PARA EL DRIVE TRAIN
+  public final static int MotorLeftRear = 0;
+  public final static int MotorLeftFront = 1;
+
+  public final static int MotorRightRear = 2;
+  public final static int MotorRightFront = 6;
+
+  // PUERTOS PARA EL CARGO HANDLER
   public final static int MotorCanonUpper = 4;
-  public final static int MotorsCanonBotton = 5;
-  //puertos para el hatch panel
-  
-  // Parametros del entorno
+  public final static int MotorCanonBottom = 5;
+
+  public final static int MotorCanonArm = 9;
+
+  // PUERTOS PARA EL HATCH PANEL HANDLER
+
+  // PARAMETROS DEL ENTORNO
   public final static double MAX_MOTOR_POWER = 1.0;
-  public final static double AVERAGE_MOTOR_POWER = 0.25;
-  public final static double STOP_MOTOR = 0.0;
+  public final static double AVERAGE_MOTOR_POWER = 0.39;
+  public final static double STOP_MOTOR = 0.0; 
 }

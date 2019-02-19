@@ -6,24 +6,93 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot.subsystems;
-// importamos los controladores de los motores
-import edu.wpi.first.wpilibj.Spark;
+
 import edu.wpi.first.wpilibj.command.Subsystem;
-import frc.robot.RobotMap;;
+import edu.wpi.first.wpilibj.Spark;
+import edu.wpi.first.wpilibj.VictorSP;
+import frc.robot.RobotMap;
 
 public class CargoHandler extends Subsystem {
-  // definiendo el motor para el canon upper y botton
-  private Spark canonUpperMotor; // motor de arriba 
-  private Spark canonBottonMotor; // motor de abajo
+  
+  private Spark canonUpperMotor; // motor arriba
+  private Spark canonBottomMotor; // moyot de abajo
   // definiendo el motor para el canon arm
-private Spark canonArmMotor;
+  private VictorSP canonArmMotor;
 
   @Override
   public void initDefaultCommand() {
+    // Set the default command for a subsystem here.
+    // setDefaultCommand(new MySpecialCommand());
     canonUpperMotor = new Spark(RobotMap.MotorCanonUpper);
-    canonBottonMotor = new Spark(RobotMap.MotorsCanonBotton);
-    canonArmMotor = new Spark(RobotMap.MotorCanonArm);
+    canonBottomMotor = new Spark(RobotMap.MotorCanonBottom);
+    canonArmMotor = new VictorSP(RobotMap.MotorCanonArm);
   }
 
-  
+  public void launchCargo(double speed){
+    // mecanismo de sustraccion
+    // baja el brazo y succiona
+    moveCargoUpperMotor(true, speed);
+    moveCargoBottomMotor(false);
+  }
+
+  public void homePosition(){
+    // se puede mandar a llamar despues de soltar
+    // el boton de succion, para el motor
+  }
+
+  public void takeCargo(double speed){
+    // mecanismo de lanzamiento
+    // ubica el brazo y lanza
+    moveCargoUpperMotor(false,speed);
+    moveCargoBottomMotor(true);
+  }
+
+  public void stopGripper(){
+    // para los motores upper y bottom
+    stopCargoUpperMotor();
+    stopCargoBottomMotor();
+  }
+
+  public void moveCargoUpperMotor(boolean negative,
+        double speed){
+    // toma una velocidad y activa el motor superior
+    if(negative){
+      canonUpperMotor.set(-speed);
+    } else {
+      canonUpperMotor.set(speed);
+    }
+  }
+
+  public void moveCargoBottomMotor(boolean negative){
+    // toma una velocidad y activa el motor inferior
+    if(negative){
+      canonBottomMotor.set(-RobotMap.MAX_MOTOR_POWER);
+    }
+    else{
+      canonBottomMotor.set(RobotMap.MAX_MOTOR_POWER);
+    }
+  }
+
+  public void moverArmMotor(boolean negative){
+    // mover el brazo
+    if(negative){
+      // el brazo baja
+      canonArmMotor.set(RobotMap.AVERAGE_MOTOR_POWER);
+    } else {
+      canonArmMotor.set(RobotMap.MAX_MOTOR_POWER);
+    }
+  }
+
+  public void stopCargoUpperMotor(){
+    // para los motores del sucker/launcher superior
+    canonUpperMotor.set(RobotMap.STOP_MOTOR);
+  }
+  public void stopCargoBottomMotor(){
+    // para el motor del sucker/launcher inferior
+    canonBottomMotor.set(RobotMap.STOP_MOTOR);
+  }
+  public void stopArmMotor(){
+    // para el motor del brazo
+    canonArmMotor.set(RobotMap.STOP_MOTOR);
+  }
 }
