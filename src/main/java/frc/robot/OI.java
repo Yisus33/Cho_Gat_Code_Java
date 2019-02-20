@@ -36,6 +36,7 @@ public class OI {
     mStick = new Joystick(RobotMap.ACTUAL_USB_PORT);
     Xbox = new Joystick(RobotMap.Control_2);
     compresor = new Compressor(0);
+    compresor.setClosedLoopControl(false);
     mainDrive = new DifferentialDriveTrain();
     cargoHandler = new CargoHandler();
     hp_handler = new HatchPanelHandler();
@@ -83,10 +84,11 @@ public class OI {
     return mStick.getRawAxis(RobotMap.SLIDER_AXIS_PORT);
   }
   public boolean Compresor_Pressed(){
-    return mStick.getRawButtonPressed(RobotMap.Compresor);
-  } 
-  public boolean Compresor_Released(){
-    return mStick.getRawButtonReleased(RobotMap.Compresor);
+    return mStick.getRawButtonPressed(RobotMap.compresor);
+  }
+
+  public boolean Compresor_Released() {
+    return mStick.getRawButtonReleased(RobotMap.compresor);
   }
   // botones del xbox
   public boolean Acutuador_Rear_UP_Pessed(){
@@ -113,6 +115,18 @@ public class OI {
   }
   public boolean Actuador_Rear_Dawn_Released(){
     return Xbox.getRawButtonReleased(RobotMap.ActuadorRearButtonDawn);
+  }
+  public boolean Elevator_UP(){
+    return Xbox.getRawButtonPressed(RobotMap.ElevatorButtonUp);
+  }
+  public boolean ElevatorButtonDawn(){
+    return Xbox.getRawButtonPressed(RobotMap.ElevatorButtonDaawn);
+  }
+  public boolean ElevatorButtonDawnStop(){
+    return Xbox.getRawButtonReleased(RobotMap.ElevatorButtonDaawn);
+  }
+  public boolean ElevatorButtonUpStop(){
+    return Xbox.getRawButtonReleased(RobotMap.ElevatorButtonUp);
   }
 
   public double getSpeed(){
@@ -223,7 +237,18 @@ public class OI {
     if (Actuador_Rear_Dawn_Released()){
       elevation.ActuadorStopRear();
     }
-
+    if (Elevator_UP()) {
+      elevation.elevatorMotorPresed();
+    }
+    if (ElevatorButtonDawn()){
+      elevation.elevatorMotorPresedDawn();
+    }
+    if (ElevatorButtonDawnStop()){
+      elevation.elevatorMotorReleased();
+    }
+    if (ElevatorButtonUpStop()){
+      elevation.elevatorMotorReleased();
+    }
     }
   }
 }

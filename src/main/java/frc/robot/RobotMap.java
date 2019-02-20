@@ -59,11 +59,9 @@ public class RobotMap {
   public final static int solenoidLeft = 1;
   public final static int solenoidRight = 0;
  
-  public final static int explode_button = 12;
-public final static int implode_button = 11;
   // PUERTOS PARA EL COMPRESSOR
 
-  public final static int Compresor = 9;
+  public final static int compresor = 9;
   
   // Actuadores
   public final static int ActuadorRear = 7;
@@ -71,8 +69,17 @@ public final static int implode_button = 11;
 
   // Elevador 
   public final static int Elevador = 3;
+
+  // botones de los actuadores
   public final static int ActuadorFrontButtonUp = 1;
   public final static int ActuadorRearButtonUp = 2;
   public final static int ActuadorFrontButtonDawn = 3;
   public final static int ActuadorRearButtonDawn = 4;
+
+    // BOTONES DEL YOLSTIc elevador
+  public final static int ElevatorButtonUp = 5;
+  public final static int ElevatorButtonDaawn = 6;
+    // Botones del hach canon
+  public final static int explode_button = 12;
+  public final static int implode_button = 11;
 }

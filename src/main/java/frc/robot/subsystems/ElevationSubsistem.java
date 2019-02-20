@@ -10,34 +10,53 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.Spark;
 import frc.robot.RobotMap;
+
+
 public class ElevationSubsistem extends Subsystem {
   
-  private Spark ActuadorMotorRear;
-  private Spark ActuadorMotorFront;
-  
+  private Spark actuadorMotorRear;
+  private Spark actuadorMotorFront;
+  private Spark elevatorMotor;
   @Override
   public void initDefaultCommand() {
-    ActuadorMotorFront = new Spark(RobotMap.ActuadorFront);
-    ActuadorMotorRear = new Spark(RobotMap.ActuadorRear);
+    actuadorMotorFront = new Spark(RobotMap.ActuadorFront);
+    actuadorMotorRear = new Spark(RobotMap.ActuadorRear);
+    elevatorMotor = new Spark(RobotMap.Elevador);
+  }
+
+  public void ActuadorFrontUp() {
+    actuadorMotorFront.set(RobotMap.MAX_MOTOR_POWER);
+  }
+
+  public void ActuadorFrontDawn() {
+    actuadorMotorFront.set(RobotMap.MAX_MOTOR_POWER_NEGATIVE);
+  }
+
+  public void ActuadorStopFront() {
+    actuadorMotorFront.set(RobotMap.STOP_MOTOR);
+  }
+
+  public void ActuadorRearUp() {
+    actuadorMotorRear.set(RobotMap.MAX_MOTOR_POWER);
+  }
+
+  public void ActuadorRearDawn() {
+    actuadorMotorRear.set(RobotMap.MAX_MOTOR_POWER_NEGATIVE);
+  }
+
+  public void ActuadorStopRear() {
+    actuadorMotorRear.set(RobotMap.STOP_MOTOR);
   }
   
-  public void ActuadorFrontUp(){
-    ActuadorMotorFront.set(RobotMap.MAX_MOTOR_POWER);
+  public void elevatorMotorPresed(){
+    elevatorMotor.set(RobotMap.MAX_MOTOR_POWER);
   }
-  public void ActuadorFrontDawn(){
-    ActuadorMotorFront.set(RobotMap.MAX_MOTOR_POWER_NEGATIVE);
+  public void elevatorMotorReleased()
+  {
+    elevatorMotor.set(RobotMap.STOP_MOTOR);
   }
-  public void ActuadorStopFront(){
-    ActuadorMotorFront.set(RobotMap.STOP_MOTOR);
-  }
-  public void ActuadorStopRear(){
-    ActuadorMotorRear.set(RobotMap.STOP_MOTOR);
-  }
-  public void ActuadorRearUp(){
-    ActuadorMotorRear.set(RobotMap.MAX_MOTOR_POWER);
-  }  
-  public void ActuadorRearDawn(){
-    ActuadorMotorRear.set(RobotMap.MAX_MOTOR_POWER_NEGATIVE);
+  public void elevatorMotorPresedDawn(){
+    elevatorMotor.set(RobotMap.MAX_MOTOR_POWER_NEGATIVE);
   }
   
 }
