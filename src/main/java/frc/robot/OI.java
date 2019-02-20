@@ -7,9 +7,12 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.Joystick;
 import frc.robot.RobotMap;
 import frc.robot.subsystems.DifferentialDriveTrain;
+import frc.robot.subsystems.ElevationSubsistem;
+import frc.robot.subsystems.HatchPanelHandler;
 import frc.robot.subsystems.CargoHandler;
 
 /**
@@ -19,16 +22,24 @@ import frc.robot.subsystems.CargoHandler;
 public class OI {
   // definimos una instancia de joystick
   public Joystick mStick;
+  public Joystick Xbox;
   // sistema principal
   private DifferentialDriveTrain mainDrive;
   private CargoHandler cargoHandler;
+  // compresor 
+  private Compressor compresor;
+  private HatchPanelHandler hp_handler;
+  private ElevationSubsistem elevation;
 
   public OI(){
     // constructor
     mStick = new Joystick(RobotMap.ACTUAL_USB_PORT);
-
+    Xbox = new Joystick(RobotMap.Control_2);
+    compresor = new Compressor(0);
     mainDrive = new DifferentialDriveTrain();
     cargoHandler = new CargoHandler();
+    hp_handler = new HatchPanelHandler();
+    elevation = new ElevationSubsistem();
   }
   
   public double getSliderData(){
@@ -70,6 +81,38 @@ public class OI {
   public double getZAxis(){
     // conseguir datos del slider
     return mStick.getRawAxis(RobotMap.SLIDER_AXIS_PORT);
+  }
+  public boolean Compresor_Pressed(){
+    return mStick.getRawButtonPressed(RobotMap.Compresor);
+  } 
+  public boolean Compresor_Released(){
+    return mStick.getRawButtonReleased(RobotMap.Compresor);
+  }
+  // botones del xbox
+  public boolean Acutuador_Rear_UP_Pessed(){
+    return Xbox.getRawButtonPressed(RobotMap.ActuadorRearButtonUp);
+  }
+  public boolean Actuador_Rear_UP_Released(){
+    return Xbox.getRawButtonReleased(RobotMap.ActuadorRearButtonUp);
+  }
+  public boolean Actuador_Fornt_UP_Pressed(){
+    return Xbox.getRawButtonPressed(RobotMap.ActuadorFrontButtonUp);
+  }
+  public boolean Actuador_Front_UP_Released(){
+    return Xbox.getRawButtonReleased(RobotMap.ActuadorFrontButtonUp);
+  }
+  public boolean Actuador_Front_Dawn_Pressed(){
+    // 
+    return Xbox.getRawButtonPressed(RobotMap.ActuadorFrontButtonDawn);
+  }
+  public boolean Actuador_Front_Dawn_Released(){
+    return Xbox.getRawButtonReleased(RobotMap.ActuadorFrontButtonDawn);
+  }
+  public boolean Actuador_Rear_Dawn_Pressed(){
+    return Xbox.getRawButtonPressed(RobotMap.ActuadorRearButtonDawn);
+  }
+  public boolean Actuador_Rear_Dawn_Released(){
+    return Xbox.getRawButtonReleased(RobotMap.ActuadorRearButtonDawn);
   }
 
   public double getSpeed(){
@@ -127,6 +170,60 @@ public class OI {
     }
     if(button_5_Released()){
       cargoHandler.stopArmMotor();
+    }
+    if(Compresor_Pressed()){
+      compresor.start();
+    }
+    if(Compresor_Released())
+    {
+      compresor.stop();
+    }
+    if(mStick.getRawButtonPressed(RobotMap.explode_button)) {
+      // si el boton 1 es presionado
+      // s_op.direction = SolenoidOperation.Direction.FORWARD;
+      hp_handler.explodeHatch();
+      // System.out.println("explode");
+    }
+    if (mStick.getRawButtonReleased(RobotMap.explode_button)) {
+      // si el boton uno es liberado
+      // s_op.direction = SolenoidOperation.Direction.STOP;
+      hp_handler.stopSolenoid();
+    }
+    if (mStick.getRawButtonPressed(RobotMap.implode_button)) {
+      // si el boton 2 es presionado
+      // s_op.direction = SolenoidOperation.Direction.REVERSE;
+      hp_handler.implodeHatch();
+      // System.out.println("implode");
+    }
+    if (mStick.getRawButtonReleased(RobotMap.implode_button)) {
+      // si el boton 2 es liberado
+      //s_op.direction = SolenoidOperation.Direction.STOP;
+      hp_handler.stopSolenoid();
+    if (Actuador_Fornt_UP_Pressed()){
+     elevation.ActuadorFrontUp(); 
+    }
+    if (Actuador_Front_UP_Released()){
+      elevation.ActuadorStopFront();
+    }
+    if (Actuador_Front_Dawn_Pressed()){
+      elevation.ActuadorFrontDawn();
+    }
+    if (Actuador_Front_Dawn_Released()){
+      elevation.ActuadorStopFront();
+    }
+    if (Acutuador_Rear_UP_Pessed()){
+      elevation.ActuadorRearUp();
+    }
+    if (Actuador_Rear_UP_Released()){
+      elevation.ActuadorStopRear();
+    }
+    if (Actuador_Rear_Dawn_Pressed()){
+      elevation.ActuadorRearDawn();
+    }
+    if (Actuador_Rear_Dawn_Released()){
+      elevation.ActuadorStopRear();
+    }
+
     }
   }
 }

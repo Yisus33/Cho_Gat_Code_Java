@@ -25,6 +25,7 @@ public class RobotMap {
 
   // PUERTOS PARA EL JOYSTICK O LOS CONTROLES
   public final static int ACTUAL_USB_PORT = 0;
+  public final static int Control_2 = 1;
   // -- botones del joystick para ejecutar acciones
   // botones para el cargo handler
   public final static int LAUNCHER_BUTTON_NUMBER = 2;
@@ -53,4 +54,25 @@ public class RobotMap {
   public final static double MAX_MOTOR_POWER = 1.0;
   public final static double AVERAGE_MOTOR_POWER = 0.39;
   public final static double STOP_MOTOR = 0.0; 
+  public final static double MAX_MOTOR_POWER_NEGATIVE = -1.0;
+  // PUERTOS PARA EL SOLENOIDE
+  public final static int solenoidLeft = 1;
+  public final static int solenoidRight = 0;
+ 
+  public final static int explode_button = 12;
+public final static int implode_button = 11;
+  // PUERTOS PARA EL COMPRESSOR
+
+  public final static int Compresor = 9;
+  
+  // Actuadores
+  public final static int ActuadorRear = 7;
+  public final static int ActuadorFront = 8;
+
+  // Elevador 
+  public final static int Elevador = 3;
+  public final static int ActuadorFrontButtonUp = 1;
+  public final static int ActuadorRearButtonUp = 2;
+  public final static int ActuadorFrontButtonDawn = 3;
+  public final static int ActuadorRearButtonDawn = 4;
 }
